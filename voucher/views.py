@@ -6,8 +6,6 @@ import pdfkit
 def voucher_html(request):
     # Пример данных, которые можно заменить на реальные из вашей базы или формы
     context = {
-        'company_name': 'ООО "АВИАСЕЙЛС БИЗНЕС"',
-        'company_tax_id': '4953332211',
         'voucher': {
             'internal_booking_number': 'ee8e2cd1-a5f9-4472-9a1d-3d85019d84b8',
             'booking_number': '227075106',
@@ -21,7 +19,8 @@ def voucher_html(request):
             'checkout_time': '12:00',
             'room_type': 'Двухместный номер Стандарт (двуспальная кровать)',
             'bed_type': 'Двуспальная кровать',
-            'guest_name': 'ROSTRIGIN PAVEL',
+            'guests': ["Иван Иванов", "Петр Петров"],
+            'hotel_image_url': 'https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI=',
             'meal_info': 'Завтрак включён',
             'price': '6349,00 ₽',
             'vat': 'Без НДС',
@@ -33,8 +32,6 @@ def voucher_html(request):
 
 def voucher_pdf(request):
     context = {
-        'company_name': 'ООО "АВИАСЕЙЛС БИЗНЕС"',
-        'company_tax_id': '4953332211',
         'voucher': {
             'internal_booking_number': 'ee8e2cd1-a5f9-4472-9a1d-3d85019d84b8',
             'booking_number': '227075106',
@@ -48,9 +45,10 @@ def voucher_pdf(request):
             'checkout_time': '12:00',
             'room_type': 'Двухместный номер Стандарт (двуспальная кровать)',
             'bed_type': 'Двуспальная кровать',
-            'guest_name': 'ROSTRIGIN PAVEL',
+            'guests': ["Иван Иванов", "Петр Петров"],
+            'hotel_image_url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnHFyGj0c1K-Mk106ZGT-juvcp-4Z8aMocHw&s',
             'meal_info': 'Завтрак включён',
-            'price': '6349,00 ₽',
+            'price': '6349,00',
             'vat': 'Без НДС',
             'additional_contact': 'Гостиница Заречная',
             'gps': '56.284943 43.929684'

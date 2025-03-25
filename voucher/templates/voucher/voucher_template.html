@@ -4,154 +4,226 @@
     <meta charset="UTF-8" />
     <title>Ваучер на проживание</title>
     <style>
-      /* Базовые стили для корректного отображения в PDF */
       body {
-        font-family: DejaVu Sans, sans-serif;
+        font-family: Arial;
         font-size: 14px;
-        margin: 20px;
+        margin: 0;
+        padding: 10px;
+        color: #0c131d;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .no-border {
+        border: none;
       }
       .header,
       .footer {
         text-align: center;
       }
-      .content {
-        margin: 20px 0;
-      }
-      .section {
-        margin-bottom: 20px;
-      }
-      h1,
-      h2 {
-        margin: 10px 0;
-      }
-      p {
-        margin: 5px 0;
-      }
-      strong {
+      .section-title {
         font-weight: bold;
+        padding: 5px 0;
+        background-color: #f0f0f0;
       }
-      /* Опционально: для разрывов страниц в PDF */
-      .page-break {
-        page-break-after: always;
+      .content-table td {
+        padding: 4px 8px;
+        vertical-align: top;
+      }
+      .info-block {
+        border: 1px solid #9ea9b7;
+        border-radius: 6px;
+        padding: 10px;
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 1.3;
       }
     </style>
   </head>
   <body>
-    <!-- Шапка ваучера -->
-    <div class="header">
-      <h1>{{ company_name }}</h1>
-      <p>ИНН: {{ company_tax_id }}</p>
-    </div>
-
-    <div class="content">
-      <!-- Информация о бронировании -->
-      <div class="section">
-        <p>
-          Внутренний номер бронирования:
-          <strong>{{ voucher.internal_booking_number }}</strong>
-        </p>
-        <p>
-          Бронирование: <strong>{{ voucher.booking_number }}</strong> от
-          <strong>{{ voucher.booking_date }}</strong>
-        </p>
-        <p>Размещение забронировано нашим партнером</p>
-      </div>
-
-      <!-- Информация о гостинице -->
-      <div class="section">
-        <h2>Информация о гостинице</h2>
-        <p><strong>Название:</strong> {{ voucher.hotel_name }}</p>
-        <p><strong>Адрес:</strong> {{ voucher.hotel_address }}</p>
-        <p><strong>Телефон:</strong> {{ voucher.hotel_phone }}</p>
-      </div>
-
-      <!-- Даты проживания -->
-      <div class="section">
-        <h2>Даты проживания</h2>
-        <p>
-          <strong>Заезд:</strong> {{ voucher.checkin_date }} с {{
-          voucher.checkin_time }}
-        </p>
-        <p>
-          <strong>Выезд:</strong> {{ voucher.checkout_date }} до {{
-          voucher.checkout_time }}
-        </p>
-      </div>
-
-      <!-- Информация о размещении -->
-      <div class="section">
-        <h2>Информация о размещении</h2>
-        <p><strong>Тип номера:</strong> {{ voucher.room_type }}</p>
-        <p><strong>Кровать:</strong> {{ voucher.bed_type }}</p>
-        <p><strong>Гости:</strong> {{ voucher.guest_name }}</p>
-      </div>
-
-      <!-- Важная информация и условия -->
-      <div class="section">
-        <h2>Важная информация</h2>
-        <p>
-          Отели оставляют за собой право взимать дополнительные обязательные
-          сборы, которые подлежат оплате гостем напрямую в отеле. В том числе,
-          но не исключительно: оплата городского налога и/или регистрационный
-          сбор за пребывание иностранных граждан, resort/facility fee.
-        </p>
-        <p>
-          Отели могут попросить гостя предоставить кредитную карту или наличный
-          депозит в качестве гарантии оплаты дополнительных услуг, таких как:
-          мини-бар, платное телевидение и др.
-        </p>
-        <p>
-          Агентство не несет ответственность за качество предоставляемых
-          гостиницей услуг. Претензии по объему и качеству услуг клиент может
-          предъявить непосредственно администрации гостиницы. В случае
-          возникновения проблем в отеле при заселении или выезде, просим
-          обращаться за поддержкой к менеджерам агентства.
-        </p>
-        <p>
-          <strong>Условия отмены и изменения заказа:</strong> Изменение
-          Заказчиком Бронирования считается отменой Бронирования и созданием
-          нового. Мы можем попробовать согласовать корректировку заказа с
-          поставщиком, однако гарантировать положительный ответ не можем.
-        </p>
-        <p>
-          При аннуляции заказа или неявке гостя в отель применяются штрафные
-          санкции в соответствии с условиями договора и тарифа.
-        </p>
-        <p>
-          Пожалуйста, предупредите заранее, если вы планируете заселиться в
-          отель после 18:00. В случае неявки гостя отель вправе отменить
-          бронирование, а также применить штрафные санкции за незаезд.
-        </p>
-      </div>
-
-      <!-- Питание -->
-      <div class="section">
-        <h2>Питание</h2>
-        <p>{{ voucher.meal_info }}</p>
-      </div>
-
-      <!-- Информация о стоимости -->
-      <div class="section">
-        <h2>Информация о стоимости</h2>
-        <p><strong>Стоимость проживания:</strong> {{ voucher.price }}</p>
-        <p><strong>В том числе НДС:</strong> {{ voucher.vat }}</p>
-        <p>
+    <!-- Header: Информация о компании и бронировании -->
+    <table class="no-border">
+      <tr>
+        <td class="header" colspan="2">
+          <h1>ООО «АВИАСЕЙЛС БИЗНЕС»</h1>
+          <p>ИНН: 4953332211</p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center; margin-top: 10px">
+          <p>
+            Внутренний номер бронирования:
+            <strong>{{ voucher.internal_booking_number }}</strong>
+          </p>
+          <p>
+            Бронирование: <strong>{{ voucher.booking_number }}</strong> от
+            <strong>{{ voucher.booking_date }}</strong>
+          </p>
+          <p>Размещение забронировано нашим партнером</p>
+        </td>
+      </tr>
+    </table>
+    <!-- Информация об отеле с изображением -->
+    <table class="no-border" style="margin-top: 10px; border: 1px solid red">
+      <tr>
+        {% if voucher.hotel_image_url %}
+          <div style="width: 100%;
+                      height: 100%;
+                      background-image: url({{ voucher.hotel_image_url }});
+                      background-size: contain;
+                      background-position: center center;
+                      background-repeat: no-repeat"></div>
+          <td style="width: 200px; border: 1px solid orange">
+            <img src="{{ voucher.hotel_image_url }}"
+                 alt="Изображение отеля"
+                 class="hotel-image"
+                 style="width: 200px;
+                        height: 200px;
+                        object-fit: cover;
+                        border-radius: 6px" />
+          </td>
+        {% endif %}
+        <td style="width: auto; border: 1px solid blue; vertical-align: top">
+          <table class="no-border content-table">
+            <tr>
+              <td>
+                <strong>{{ voucher.hotel_name }}</strong>
+              </td>
+            </tr>
+            <tr>
+              <td>{{ voucher.hotel_address }}</td>
+            </tr>
+            <tr>
+              <td>{{ voucher.hotel_phone }}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- Даты заезда и выезда -->
+    <table class="no-border" style="margin-top: 10px">
+      <tr>
+        <td style="width: 50%; vertical-align: top">
+          <table class="no-border content-table">
+            <tr>
+              <td class="section-title">Заезд</td>
+            </tr>
+            <tr>
+              <td>{{ voucher.checkin_date }}</td>
+            </tr>
+            <tr>
+              <td>с {{ voucher.checkin_time }}</td>
+            </tr>
+          </table>
+        </td>
+        <td style="width: 50%; vertical-align: top">
+          <table class="no-border content-table">
+            <tr>
+              <td class="section-title">Выезд</td>
+            </tr>
+            <tr>
+              <td>{{ voucher.checkout_date }}</td>
+            </tr>
+            <tr>
+              <td>до {{ voucher.checkout_time }}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <!-- Информация о размещении -->
+    <table class="no-border content-table" style="margin-top: 10px">
+      <tr>
+        <td colspan="2" class="section-title">Информация о размещении</td>
+      </tr>
+      <tr>
+        <td style="width: 30%">Тип номера:</td>
+        <td>{{ voucher.room_type }}</td>
+      </tr>
+      <tr>
+        <td>Кровать:</td>
+        <td>{{ voucher.bed_type }}</td>
+      </tr>
+      <tr>
+        <td>Питание:</td>
+        <td>{{ voucher.meal_info }}</td>
+      </tr>
+      <tr>
+        <td>Гости:</td>
+        <td>
+          {% if voucher.guests %}
+            {% for guest in voucher.guests %}
+              {{ guest }}
+              {% if not forloop.last %},{% endif %}
+            {% endfor %}
+          {% else %}
+            {{
+            voucher.guest_name }}
+          {% endif %}
+        </td>
+      </tr>
+      <tr>
+        <td>GPS:</td>
+        <td>{{ voucher.gps }}</td>
+      </tr>
+    </table>
+    <!-- Информация о стоимости -->
+    <table class="no-border content-table" style="margin-top: 10px">
+      <tr>
+        <td colspan="2" class="section-title">Информация о стоимости</td>
+      </tr>
+      <tr>
+        <td style="width: 50%">Стоимость проживания:</td>
+        <td>{{ voucher.price }} ₽</td>
+      </tr>
+      <tr>
+        <td>В том числе НДС:</td>
+        <td>{{ voucher.vat }}</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="font-size: 12px; padding-top: 5px">
           Стоимость проживания указана справочно и не включает допуслуги,
           окончательная стоимость будет отображена в закрывающих документах.
-        </p>
-      </div>
-
-      <!-- Дополнительная информация (контакты, GPS) -->
-      <div class="section">
-        <h2>Контактная информация</h2>
-        <p>{{ voucher.additional_contact }}</p>
-        <p><strong>GPS:</strong> {{ voucher.gps }}</p>
-      </div>
-    </div>
-
-    <!-- Подвал ваучера -->
-    <div class="footer">
-      <p>Справка к ваучеру на проживание</p>
+        </td>
+      </tr>
+    </table>
+    <!-- Дополнительная информация о сервисе и условиях -->
+    <div class="info-block">
+      <h2 style="margin-top: 0px">Важная информация</h2>
+      <p>
+        Отели оставляют за собой право взимать дополнительные обязательные
+        сборы, которые подлежат оплате гостем напрямую в отеле. В том числе, но
+        не исключительно: оплата городского налога и/или регистрационный сбор за
+        пребывание иностранных граждан, resort/facility fee.
+      </p>
+      <p>
+        Отели могут попросить гостя предоставить кредитную карту или наличный
+        депозит в качестве гарантии оплаты дополнительных услуг, таких как:
+        мини-бар, платное телевидение и др.
+      </p>
+      <p>
+        Агентство не несет ответственность за качество предоставляемых
+        гостиницей услуг. Претензии по объему и качеству услуг клиент может
+        предъявить непосредственно администрации гостиницы. В случае
+        возникновения проблем при заселении или выезде, просим обращаться за
+        поддержкой к менеджерам агентства.
+      </p>
+      <h2>Условия отмены и изменения заказа</h2>
+      <p>
+        Изменение Заказчиком бронирования считается отменой и созданием нового.
+        Мы можем попробовать согласовать корректировку заказа с поставщиком,
+        однако гарантировать положительный ответ не можем.
+      </p>
+      <p>
+        При аннуляции заказа или неявке гостя в отель применяются штрафные
+        санкции в соответствии с условиями договора и тарифа.
+      </p>
+      <p>
+        Пожалуйста, предупредите заранее, если вы планируете заселиться в отель
+        после 18:00. В случае неявки, отель вправе отменить бронирование, а
+        также применить штрафные санкции за незаезд.
+      </p>
     </div>
   </body>
 </html>
