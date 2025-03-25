@@ -18,22 +18,18 @@
       .no-border {
         border: none;
       }
-      .header,
-      .footer {
-        text-align: center;
-      }
       .section-title {
         font-weight: bold;
         padding: 5px 0;
-        background-color: #f0f0f0;
+        background-color: #eff1f4;
       }
       .content-table td {
         padding: 4px 8px;
         vertical-align: top;
       }
       .info-block {
-        border: 1px solid #9ea9b7;
-        border-radius: 6px;
+        border: 1px solid #cdd4de;
+        border-radius: 12px;
         padding: 10px;
         margin-top: 10px;
         font-size: 12px;
@@ -45,13 +41,13 @@
     <!-- Header: Информация о компании и бронировании -->
     <table class="no-border">
       <tr>
-        <td class="header" colspan="2">
-          <h1>ООО «АВИАСЕЙЛС БИЗНЕС»</h1>
-          <p>ИНН: 4953332211</p>
+        <td style="text-align: left">
+          <h2 style="margin-bottom: 0px; margin-top: 0px">
+            ООО «АВИАСЕЙЛС БИЗНЕС»
+          </h2>
+          <p style="margin-top: 4px">ИНН: 4953332211</p>
         </td>
-      </tr>
-      <tr>
-        <td colspan="2" style="text-align: center; margin-top: 10px">
+        <td style="text-align: right">
           <p>
             Внутренний номер бронирования:
             <strong>{{ voucher.internal_booking_number }}</strong>
@@ -65,30 +61,28 @@
       </tr>
     </table>
     <!-- Информация об отеле с изображением -->
-    <table class="no-border" style="margin-top: 10px; border: 1px solid red">
+    <table class="no-border" style="margin-top: 10px">
       <tr>
         {% if voucher.hotel_image_url %}
-          <div style="width: 100%;
-                      height: 100%;
-                      background-image: url({{ voucher.hotel_image_url }});
-                      background-size: contain;
-                      background-position: center center;
-                      background-repeat: no-repeat"></div>
-          <td style="width: 200px; border: 1px solid orange">
-            <img src="{{ voucher.hotel_image_url }}"
-                 alt="Изображение отеля"
-                 class="hotel-image"
-                 style="width: 200px;
-                        height: 200px;
-                        object-fit: cover;
-                        border-radius: 6px" />
-          </td>
+        <td style="width: 150px">
+          <img
+            src="{{ voucher.hotel_image_url }}"
+            alt="Изображение отеля"
+            class="hotel-image"
+            style="
+              width: 150px;
+              height: 150px;
+              object-fit: cover;
+              border-radius: 8px;
+            "
+          />
+        </td>
         {% endif %}
-        <td style="width: auto; border: 1px solid blue; vertical-align: top">
+        <td style="width: auto; vertical-align: top">
           <table class="no-border content-table">
             <tr>
               <td>
-                <strong>{{ voucher.hotel_name }}</strong>
+                <h3 style="margin: 0px">{{ voucher.hotel_name }}</h3>
               </td>
             </tr>
             <tr>
@@ -152,15 +146,8 @@
       <tr>
         <td>Гости:</td>
         <td>
-          {% if voucher.guests %}
-            {% for guest in voucher.guests %}
-              {{ guest }}
-              {% if not forloop.last %},{% endif %}
-            {% endfor %}
-          {% else %}
-            {{
-            voucher.guest_name }}
-          {% endif %}
+          {% if voucher.guests %} {% for guest in voucher.guests %} {{ guest }}
+          {% if not forloop.last %},{% endif %} {% endfor %} {% endif %}
         </td>
       </tr>
       <tr>
