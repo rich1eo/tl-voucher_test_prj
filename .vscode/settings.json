@@ -1,5 +1,5 @@
 {
   "[django-html]": {
-    "editor.defaultFormatter": null
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   }
 }

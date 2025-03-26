@@ -32,8 +32,7 @@
         border-radius: 12px;
         padding: 10px;
         margin-top: 10px;
-        font-size: 12px;
-        line-height: 1.3;
+        font-size: 14px;
       }
     </style>
   </head>
@@ -42,10 +41,8 @@
     <table class="no-border">
       <tr>
         <td style="text-align: left">
-          <h2 style="margin-bottom: 0px; margin-top: 0px">
-            ООО «АВИАСЕЙЛС БИЗНЕС»
-          </h2>
-          <p style="margin-top: 4px">ИНН: 4953332211</p>
+          <h2 style="margin-bottom: 0px; margin-top: 0px">ООО «АВИАСЕЙЛС БИЗНЕС»</h2>
+          <p style="margin-top: 4px">ИНН: 9710080462</p>
         </td>
         <td style="text-align: right">
           <p>
@@ -64,19 +61,15 @@
     <table class="no-border" style="margin-top: 10px">
       <tr>
         {% if voucher.hotel_image_url %}
-        <td style="width: 150px">
-          <img
-            src="{{ voucher.hotel_image_url }}"
-            alt="Изображение отеля"
-            class="hotel-image"
-            style="
-              width: 150px;
-              height: 150px;
-              object-fit: cover;
-              border-radius: 8px;
-            "
-          />
-        </td>
+          <td style="width: 150px">
+            <img src="{{ voucher.hotel_image_url }}"
+                 alt="Изображение отеля"
+                 class="hotel-image"
+                 style="width: 150px;
+                        height: 150px;
+                        object-fit: cover;
+                        border-radius: 8px" />
+          </td>
         {% endif %}
         <td style="width: auto; vertical-align: top">
           <table class="no-border content-table">
@@ -132,12 +125,12 @@
         <td colspan="2" class="section-title">Информация о размещении</td>
       </tr>
       <tr>
-        <td style="width: 30%">Тип номера:</td>
+        <td style="width: 17%">Тип номера:</td>
         <td>{{ voucher.room_type }}</td>
       </tr>
       <tr>
         <td>Кровать:</td>
-        <td>{{ voucher.bed_type }}</td>
+        <td>{{ voucher.bedding_type }}</td>
       </tr>
       <tr>
         <td>Питание:</td>
@@ -146,8 +139,11 @@
       <tr>
         <td>Гости:</td>
         <td>
-          {% if voucher.guests %} {% for guest in voucher.guests %} {{ guest }}
-          {% if not forloop.last %},{% endif %} {% endfor %} {% endif %}
+          {% if voucher.guests %}
+            {% for guest in voucher.guests %}
+              {{ guest }}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+          {% endif %}
         </td>
       </tr>
       <tr>
@@ -161,13 +157,22 @@
         <td colspan="2" class="section-title">Информация о стоимости</td>
       </tr>
       <tr>
-        <td style="width: 50%">Стоимость проживания:</td>
-        <td>{{ voucher.price }} ₽</td>
+        <td style="width: 22%">Стоимость проживания:</td>
+        <td>{{ voucher.price }} ₽ (оплачено)</td>
       </tr>
+      {% if voucher.taxes %}
       <tr>
-        <td>В том числе НДС:</td>
-        <td>{{ voucher.vat }}</td>
+        <td>
+          <div>Доп. сборы:</div>
+          <div style="margin-top: 2px; font-size: 12px">Оплачиваются при заселении</div>
+        </td>
+        <td>
+          {% for tax in voucher.taxes %}
+            {{ tax.name }} — {{ tax.price }} ₽ {% if not forloop.last %},{% endif %}
+          {% endfor %}
+        </td>
       </tr>
+      {% endif %}
       <tr>
         <td colspan="2" style="font-size: 12px; padding-top: 5px">
           Стоимость проживания указана справочно и не включает допуслуги,
