@@ -45,24 +45,24 @@
           <p style="margin-top: 4px">ИНН: 9710080462</p>
         </td>
         <td style="text-align: right">
-          <p>
+          <p style="margin: 0px; margin-bottom: 4px">
             Внутренний номер бронирования:
-            <strong>{{ voucher.internal_booking_number }}</strong>
+            <strong>{{ internal_booking_number }}</strong>
           </p>
-          <p>
-            Бронирование: <strong>{{ voucher.booking_number }}</strong> от
-            <strong>{{ voucher.booking_date }}</strong>
+          <p style="margin: 0px; margin-bottom: 4px">
+            Бронирование: <strong>{{ booking_number }}</strong> от
+            <strong>{{ booking_date }}</strong>
           </p>
-          <p>Размещение забронировано нашим партнером</p>
+          <p style="margin: 0px">Размещение забронировано нашим партнером</p>
         </td>
       </tr>
     </table>
     <!-- Информация об отеле с изображением -->
     <table class="no-border" style="margin-top: 10px">
       <tr>
-        {% if voucher.hotel_image_url %}
+        {% if hotel_image_url %}
           <td style="width: 150px">
-            <img src="{{ voucher.hotel_image_url }}"
+            <img src="{{ hotel_image_url }}"
                  alt="Изображение отеля"
                  class="hotel-image"
                  style="width: 150px;
@@ -75,14 +75,14 @@
           <table class="no-border content-table">
             <tr>
               <td>
-                <h3 style="margin: 0px">{{ voucher.hotel_name }}</h3>
+                <h3 style="margin: 0px">{{ hotel_name }}</h3>
               </td>
             </tr>
             <tr>
-              <td>{{ voucher.hotel_address }}</td>
+              <td>{{ hotel_address }}</td>
             </tr>
             <tr>
-              <td>{{ voucher.hotel_phone }}</td>
+              <td>{{ hotel_phone }}</td>
             </tr>
           </table>
         </td>
@@ -97,10 +97,10 @@
               <td class="section-title">Заезд</td>
             </tr>
             <tr>
-              <td>{{ voucher.checkin_date }}</td>
+              <td>{{ checkin_date }}</td>
             </tr>
             <tr>
-              <td>с {{ voucher.checkin_time }}</td>
+              <td>с {{ checkin_time }}</td>
             </tr>
           </table>
         </td>
@@ -110,10 +110,10 @@
               <td class="section-title">Выезд</td>
             </tr>
             <tr>
-              <td>{{ voucher.checkout_date }}</td>
+              <td>{{ checkout_date }}</td>
             </tr>
             <tr>
-              <td>до {{ voucher.checkout_time }}</td>
+              <td>до {{ checkout_time }}</td>
             </tr>
           </table>
         </td>
@@ -126,21 +126,21 @@
       </tr>
       <tr>
         <td style="width: 17%">Тип номера:</td>
-        <td>{{ voucher.room_type }}</td>
+        <td>{{ room_type }}</td>
       </tr>
       <tr>
         <td>Кровать:</td>
-        <td>{{ voucher.bedding_type }}</td>
+        <td>{{ bedding_type }}</td>
       </tr>
       <tr>
         <td>Питание:</td>
-        <td>{{ voucher.meal_info }}</td>
+        <td>{{ meal_info }}</td>
       </tr>
       <tr>
         <td>Гости:</td>
         <td>
-          {% if voucher.guests %}
-            {% for guest in voucher.guests %}
+          {% if guests %}
+            {% for guest in guests %}
               {{ guest }}{% if not forloop.last %},{% endif %}
             {% endfor %}
           {% endif %}
@@ -148,7 +148,7 @@
       </tr>
       <tr>
         <td>GPS:</td>
-        <td>{{ voucher.gps }}</td>
+        <td>{{ gps }}</td>
       </tr>
     </table>
     <!-- Информация о стоимости -->
@@ -158,16 +158,16 @@
       </tr>
       <tr>
         <td style="width: 22%">Стоимость проживания:</td>
-        <td>{{ voucher.price }} ₽ (оплачено)</td>
+        <td>{{ price }} ₽ (оплачено)</td>
       </tr>
-      {% if voucher.taxes %}
+      {% if taxes %}
       <tr>
         <td>
           <div>Доп. сборы:</div>
           <div style="margin-top: 2px; font-size: 12px">Оплачиваются при заселении</div>
         </td>
         <td>
-          {% for tax in voucher.taxes %}
+          {% for tax in taxes %}
             {{ tax.name }} — {{ tax.price }} ₽ {% if not forloop.last %},{% endif %}
           {% endfor %}
         </td>

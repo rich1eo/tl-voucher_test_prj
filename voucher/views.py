@@ -4,27 +4,24 @@ from django.template.loader import render_to_string
 import pdfkit
 
 context = {
-  'voucher': {
-    'internal_booking_number': 'ee8e2cd1-a5f9-4472-9a1d-3d85019d84b8',
-    'booking_number': '227075106',
-    'booking_date': '25.03.2025',
-    'hotel_name': 'Гостиница Заречная',
-    'hotel_address': '603076, проспект Ленина, д. 36, Нижний Новгород',
-    'hotel_phone': '+79200774940',
-    'checkin_date': '25.03.2025',
-    'checkin_time': '14:00',
-    'checkout_date': '26.03.2025',
-    'checkout_time': '12:00',
-    'room_type': 'Двухместный номер Стандарт (двуспальная кровать)',
-    'bedding_type': '2 взрослых на основных местах, 1 ребенок на дополнительном месте.',
-    'guests': ["Иван Иванов", "Петр Петров"],
-    'hotel_image_url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnHFyGj0c1K-Mk106ZGT-juvcp-4Z8aMocHw&s',
-    'meal_info': 'Завтрак включён',
-    'price': '6349,00',
-    'taxes': [{'name': 'Курортный сбор', 'price': '200,00'}, {'name': 'НДС', 'price': '300,00'}],
-    'additional_contact': 'Гостиница Заречная',
-    'gps': '56.284943 43.929684'
-  }
+  'internal_booking_number': 'ee8e2cd1-a5f9-4472-9a1d-3d85019d84b8',
+  'booking_number': '227075106',
+  'booking_date': '25.03.2025',
+  'hotel_name': 'Гостиница Заречная',
+  'hotel_address': '603076, проспект Ленина, д. 36, Нижний Новгород',
+  'hotel_phone': '+79200774940',
+  'checkin_date': '25.03.2025',
+  'checkin_time': '14:00',
+  'checkout_date': '26.03.2025',
+  'checkout_time': '12:00',
+  'room_type': 'Двухместный номер Стандарт (двуспальная кровать)',
+  'bedding_type': '2 взрослых на основных местах, 1 ребенок на дополнительном месте.',
+  'guests': ["Иван Иванов", "Петр Петров"],
+  'hotel_image_url': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnHFyGj0c1K-Mk106ZGT-juvcp-4Z8aMocHw&s',
+  'meal_info': 'Завтрак включён',
+  'price': '6349,00',
+  'taxes': [{'name': 'Курортный сбор', 'price': '200,00'}, {'name': 'НДС', 'price': '300,00'}],
+  'gps': '56.284943 43.929684'
 }
 
 def voucher_html(request):
