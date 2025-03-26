@@ -61,30 +61,35 @@
     <table class="no-border" style="margin-top: 10px">
       <tr>
         {% if hotel_image_url %}
-          <td style="width: 150px">
+          <td style="width: 120px">
             <img src="{{ hotel_image_url }}"
                  alt="Изображение отеля"
                  class="hotel-image"
-                 style="width: 150px;
-                        height: 150px;
+                 style="width: 120px;
+                        height: 120px;
                         object-fit: cover;
                         border-radius: 8px" />
           </td>
         {% endif %}
         <td style="width: auto; vertical-align: top">
-          <table class="no-border content-table">
+          <div style="margin-left: 15px">
+            <h3 style="margin: 0px; margin-bottom: 4px">{{ hotel_name }}</h3>
+            <p style="margin: 0px; margin-bottom: 8px">{{ hotel_address }}</p>
+            <p style="margin: 0px">{{ hotel_phone }}</p>
+          </div
+          {% comment %} <table class="no-border content-table">
             <tr>
               <td>
                 <h3 style="margin: 0px">{{ hotel_name }}</h3>
               </td>
             </tr>
-            <tr>
-              <td>{{ hotel_address }}</td>
+            <tr style="margin: 0px">
+              <td style="margin: 0px">{{ hotel_address }}</td>
             </tr>
             <tr>
               <td>{{ hotel_phone }}</td>
             </tr>
-          </table>
+          </table> {% endcomment %}
         </td>
       </tr>
     </table>
