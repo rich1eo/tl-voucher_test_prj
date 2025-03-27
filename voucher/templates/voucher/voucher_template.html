@@ -173,7 +173,7 @@
         </td>
         <td>
           {% for tax in taxes %}
-            {{ tax.name }} — {{ tax.price }} ₽ {% if not forloop.last %},{% endif %}
+            {{ tax.name }} — {{ tax.price }} ₽{% if not forloop.last %},{% endif %}
           {% endfor %}
         </td>
       </tr>
